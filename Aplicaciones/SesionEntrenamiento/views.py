@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import SesionEntrenamiento
 from .models import PerroDetector
 from .models import AdiestradorAgricola
+from django.contrib import messages
 
 def inicioSesion(request):
     listadoSesiones = SesionEntrenamiento.objects.all()
@@ -24,6 +25,7 @@ def guardarSesion(request):
         adiestrador = AdiestradorAgricola.objects.get(id=adiestrador_id)
 
         SesionEntrenamiento.objects.create(fecha=fecha, duracion=duracion, resultado=resultado, perro=perro, adiestrador=adiestrador)
+        messages.success(request, "SE HA AGREGADO EL NUEVO SESION DE ENTRENAMIENTO")
 
         return redirect('indexSesion')
     return redirect('indexSesion')
@@ -31,6 +33,7 @@ def guardarSesion(request):
 def eliminarSesion(request, id):
     sesionEliminar = SesionEntrenamiento.objects.get(id=id)
     sesionEliminar.delete()
+    messages.success(request, "SE HA ELIMINADO LA SESION DE ENTRENAMIENTO")
     return redirect('indexSesion')
 
 def editarSesion(request, id):
@@ -56,5 +59,6 @@ def procesarEdicionSesion(request, id):
     sesion.perro = perro
     sesion.adiestrador = adiestrador
     sesion.save()
+    messages.success(request, "SE HA EDITADO LA SESION DE ENTRENAMIENTO")
 
     return redirect('indexSesion')
