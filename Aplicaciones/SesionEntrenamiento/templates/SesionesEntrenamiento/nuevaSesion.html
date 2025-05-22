@@ -1,0 +1,52 @@
+{% extends "plantilla.html" %}
+{% block contenido %}
+  <div class="row mt-4">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 bg-light p-4 rounded shadow">
+          <h1 class="text-center mb-4">Registro de Sesión de Entrenamiento</h1>
+
+          <form action="{% url 'guardarSesion' %}" method="post">
+              {% csrf_token %}
+
+              <div class="mb-3">
+                  <label for="fecha" class="form-label">Fecha</label>
+                  <input type="date" class="form-control" name="fecha" id="fecha" required>
+              </div>
+
+              <div class="mb-3">
+                  <label for="duracion" class="form-label">Duración (minutos)</label>
+                  <input type="number" class="form-control" name="duracion" id="duracion" required>
+              </div>
+
+              <div class="mb-3">
+                  <label for="resultado" class="form-label">Resultado</label>
+                  <textarea class="form-control" name="resultado" id="resultado" rows="3" required></textarea>
+              </div>
+
+              <div class="mb-3">
+                  <label for="perro" class="form-label">Perro Detector</label>
+                  <select class="form-select" name="perro" id="perro" required>
+                      {% for perro in perros %}
+                          <option value="{{ perro.id }}">{{ perro.nombre }}</option>
+                      {% endfor %}
+                  </select>
+              </div>
+
+              <div class="mb-3">
+                  <label for="adiestrador" class="form-label">Adiestrador Agrícola</label>
+                  <select class="form-select" name="adiestrador" id="adiestrador" required>
+                      {% for adiestrador in adiestradores %}
+                          <option value="{{ adiestrador.id }}">{{ adiestrador.nombre }}</option>
+                      {% endfor %}
+                  </select>
+              </div>
+
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                  <a href="{% url 'indexSesion' %}" class="btn btn-outline-danger me-md-2">Cancelar <i class="fa fa-times"></i></a>
+                  <button type="submit" class="btn btn-outline-success">Guardar Sesión <i class="fa-solid fa-floppy-disk"></i></button>
+              </div>
+          </form>
+      </div>
+      <div class="col-md-3"></div>
+  </div>
+{% endblock contenido %}

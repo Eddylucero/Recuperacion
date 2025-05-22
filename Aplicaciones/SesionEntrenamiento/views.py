@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import SesionEntrenamiento
-from Aplicaciones.PerroDetector.models import PerroDetector
-from Aplicaciones.AdiestradorAgricola.models import AdiestradorAgricola
+from .models import PerroDetector
+from .models import AdiestradorAgricola
 
 def inicioSesion(request):
     listadoSesiones = SesionEntrenamiento.objects.all()
