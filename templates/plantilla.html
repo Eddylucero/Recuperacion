@@ -85,5 +85,17 @@
         </div>
     </footer>
 
+    {% if messages %}
+      {% for message in messages %}
+        <script>
+          Swal.fire({
+            title: "CONFIRMACIÓN",
+            text: "{{ message }}",
+            icon: "success",
+          });
+        </script>
+      {% endfor %}
+    {% endif %}
+
 </body>
 </html>
