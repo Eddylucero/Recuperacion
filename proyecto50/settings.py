@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Aplicaciones.PerroDetector',
     'Aplicaciones.AdiestradorAgricola',
     'Aplicaciones.SesionEntrenamiento',
+    'Aplicaciones.Inicio',
 ]
 
 MIDDLEWARE = [
