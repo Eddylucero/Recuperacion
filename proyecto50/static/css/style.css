@@ -15,3 +15,21 @@
     color: white !important;
     border: 2px solid white;
 }
+#sidebar {
+    transition: opacity 0.5s ease-in-out, width 0.5s ease-in-out;
+}
+
+.hidden {
+    opacity: 0;
+    width: 0;
+}
+.footer-container {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
