@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import AdiestradorAgricola
+from django.contrib import messages
 
 def inicioAdiestrador(request):
     listadoAdiestradores = AdiestradorAgricola.objects.all()
@@ -15,6 +16,7 @@ def guardarAdiestrador(request):
         experiencia = request.POST["experiencia"]
 
         AdiestradorAgricola.objects.create(nombre=nombre, especialidad=especialidad, experiencia=experiencia)
+        messages.success(request, "SE HA AGREGADO EL NUEVO ADIESTRADOR AGRÍCOLA")
 
         return redirect('indexAdiestrador')
     return redirect('indexAdiestrador')
@@ -22,6 +24,7 @@ def guardarAdiestrador(request):
 def eliminarAdiestrador(request, id):
     adiestradorEliminar = AdiestradorAgricola.objects.get(id=id)
     adiestradorEliminar.delete()
+    messages.success(request, "SE HA ELIMINADO EL ADIESTRADOR AGRÍCOLA")
     return redirect('indexAdiestrador')
 
 def editarAdiestrador(request, id):
@@ -38,5 +41,6 @@ def procesarEdicionAdiestrador(request, id):
     adiestrador.especialidad = especialidad
     adiestrador.experiencia = experiencia
     adiestrador.save()
+    messages.success(request, "SE HA EDITADO EL ADIESTRADOR AGRÍCOLA")
 
     return redirect('indexAdiestrador')
