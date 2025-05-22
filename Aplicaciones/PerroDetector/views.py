@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import PerroDetector
+from django.contrib import messages
 
 def inicioPerro(request):
     listadoPerros = PerroDetector.objects.all()
@@ -16,6 +17,7 @@ def guardarPerro(request):
         estado = request.POST["estado"]
 
         PerroDetector.objects.create(nombre=nombre, raza=raza, edad=edad, estado=estado)
+        messages.success(request, "SE HA AGREGADO LOS NUEVOS PERROS DETECTORES")
 
         return redirect('indexPerro')
     return redirect('indexPerro')
@@ -23,6 +25,7 @@ def guardarPerro(request):
 def eliminarPerro(request, id):
     perroEliminar = PerroDetector.objects.get(id=id)
     perroEliminar.delete()
+    messages.success(request, "SE HA ELIMINADO EL PERRO DETECTOR")
     return redirect('indexPerro')
 
 def editarPerro(request, id):
@@ -41,5 +44,6 @@ def procesarEdicionPerro(request, id):
     perro.edad = edad
     perro.estado = estado
     perro.save()
+    messages.success(request, "SE HA EDITADO EL PERRO DETECTOR")
 
     return redirect('indexPerro')
