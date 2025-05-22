@@ -1,0 +1,45 @@
+{% extends "plantilla.html" %}
+{% block contenido %}
+
+<div class="row mt-4">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light p-4 rounded shadow">
+        <h1 class="text-center mb-4">Editar Perro Detector</h1>
+
+        <form action="{% url 'procesarEdicionPerro' perro.id %}" method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" id="nombre" value="{{ perro.nombre }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="raza" class="form-label">Raza</label>
+                <input type="text" class="form-control" name="raza" id="raza" value="{{ perro.raza }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="edad" class="form-label">Edad</label>
+                <input type="number" class="form-control" name="edad" id="edad" value="{{ perro.edad }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="estado" class="form-label">Estado de Entrenamiento</label>
+                <select class="form-select" name="estado" id="estado" required>
+                    <option value="En progreso" {% if perro.estado == "En progreso" %}selected{% endif %}>En progreso</option>
+                    <option value="Certificado" {% if perro.estado == "Certificado" %}selected{% endif %}>Certificado</option>
+                </select>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                <a href="{% url 'indexPerro' %}" class="btn btn-outline-danger me-md-2">Cancelar <i class="fa fa-times"></i></a>
+                <button type="submit" class="btn btn-outline-primary">Actualizar Perro <i class="fa-solid fa-pen-to-square"></i></button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+{% endblock contenido %}
+
